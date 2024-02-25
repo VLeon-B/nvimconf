@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 local options = vim.o
 
 options.number = true
