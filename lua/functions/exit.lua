@@ -1,3 +1,3 @@
 return function()
-	print('aonetuh')
+  vim.cmd(':q<CR>')
 end

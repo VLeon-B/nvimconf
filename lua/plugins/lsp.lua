@@ -1,15 +1,15 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-  "williamboman/mason.nvim",
-  "folke/neodev.nvim",
+    "williamboman/mason.nvim",
+    "folke/neodev.nvim",
   },
   config = function()
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
     vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-    local on_attach = function(_ , buffnumber)
+    local on_attach = function(_, buffnumber)
       vim.bo[buffnumber].omnifunc = 'v:lua.vim.lsp.omnifunc'
       local opts = { buffer = buffnumber }
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -28,12 +28,13 @@ return {
 
     require("neodev").setup()
     require("lspconfig").lua_ls.setup({
-     on_attach = on_attach,
-     settings= {
-      Lua = {
-      workspace = { checkThirdParty = false}
+      on_attach = on_attach,
+      settings = {
+        Lua = {
+          workspace = { checkThirdParty = false }
+        }
       }
-    }
-  })
+    })
+    require("lspconfig").tsserver.setup({})
   end
 }
