@@ -25,14 +25,14 @@ return {
   end,
   keys = {
     {
-      "<leader>pp",
+      "<leader>tg",
       function()
         require('telescope.builtin').git_files({ show_untracked = true })
       end,
       desc = "Telescope Git Files",
     },
     {
-      "<leader>pe",
+      "<leader>tb",
       function()
         require("telescope.builtin").buffers()
       end,
@@ -60,7 +60,7 @@ return {
       desc = "Telescope Git branches",
     },
     {
-      "<leader>rp",
+      "<leader>tp",
       function()
         require("telescope.builtin").find_files({
           prompt_title = "Plugins",
@@ -68,7 +68,7 @@ return {
           attach_mappings = function(_, map)
             local actions = require("telescope.actions")
             local action_state = require("telescope.actions.state")
-            map("i", "<c-y>", function(prompt_bufnr)
+            map("i", "<cr>", function(prompt_bufnr)
               local new_plugin = action_state.get_current_line()
               actions.close(prompt_bufnr)
               vim.cmd(string.format("edit ~/.config/nvim/lua/plugins/%s.lua", new_plugin))
@@ -79,21 +79,21 @@ return {
       end
     },
     {
-      "<leader>pf",
+      "<leader>t<leader>",
       function()
         require('telescope.builtin').find_files()
       end,
       desc = "Telescope Find Files",
     },
     {
-      "<leader>ph",
+      "<leader>t?",
       function()
         require("telescope.builtin").help_tags()
       end,
       desc = "Telescope Help"
     },
     {
-      "<leader>bm",
+      "<leader>th",
       function()
         require("telescope").extensions.file_browser.file_browser({ path = "%:h:p", select_buffer = true })
       end,
