@@ -35,6 +35,18 @@ return {
         }
       }
     })
+    require('lspconfig').yamlls.setup {
+      settings = {
+        yaml = {
+          workspace = { checkThirdParty = false },
+          schemas = {
+            ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+            ["../path/relative/to/file.yml"] = "/.github/workflows/*",
+            ["/path/from/root/of/project"] = "/.github/workflows/*",
+          },
+        },
+      }
+    }
     require("lspconfig").tsserver.setup({})
   end
 }
