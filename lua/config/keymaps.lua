@@ -11,7 +11,11 @@ kmap.set('n', '<leader>s<leader>', ':%s#', {desc = 'Open replace mode'})
 
 -- mod on all modes
 -- movement changes
-kmap.set('', 'n', 'l', {desc = 'Right movement changed to help dvorak layout'})
+kmap.set('', 's', 'l', {desc = 'Right movement changed to help dvorak layout'})
+kmap.set('', 'l', 's', {desc = ''})
+kmap.set('', 't', 'j', {desc = ''})
+kmap.set('', 'j', 't', {desc = ''})
+kmap.set('', 'n', 'k', {desc = ''})
 kmap.set('', 'm', 'nzzzv', {desc = 'Search and auto adjust to center'})
 kmap.set('', 'M', 'Nzzzv', {desc = 'Search back and auto adjust to center'})
 
@@ -24,11 +28,12 @@ kmap.set('', '<leader>QQ', ':q!<cr>', {desc = 'Quit without save'})
 
 -- window management
 kmap.set('', '<leader>wh', '<C-w>h', {desc = 'Swap to left window'})
-kmap.set('', '<leader>wj', '<C-w>j', {desc = 'Swap to bottom window'})
-kmap.set('', '<leader>wk', '<C-w>k', {desc = 'Swap to top window'})
-kmap.set('', '<leader>wn', '<C-w>l', {desc = 'Swap to right window'})
+kmap.set('', '<leader>wt', '<C-w>j', {desc = 'Swap to bottom window'})
+kmap.set('', '<leader>wn', '<C-w>k', {desc = 'Swap to top window'})
+kmap.set('', '<leader>ws', '<C-w>l', {desc = 'Swap to right window'})
 kmap.set('', '<leader>wv', '<C-w>v', {desc = 'Create vertical spit'})
-kmap.set('', '<leader>ws', '<C-w>s', {desc = 'Create horizontal spit'})
+kmap.set('', '<leader>wm', '<C-w>s', {desc = 'Create horizontal spit'})
+kmap.set('', '<leader>wd', '<C-w>q', {desc = 'Create horizontal spit'})
 kmap.set('', '<leader>(', '<C-w><', {desc = 'Decrease window width'})
 kmap.set('', '<leader>)', '<C-w>>', {desc = 'Increase window width'})
 kmap.set('', '<leader>{', '<C-w>-', {desc = 'Decrease window height'})
