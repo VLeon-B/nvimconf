@@ -1,3 +1,4 @@
+-- mods for keybindings
 local kmap = vim.keymap
 
 -- mod on terminal mode
