@@ -1,8 +1,12 @@
 return {
-	"olimorris/onedarkpro.nvim",
-	priority = 1000,
-	config = function()
-    vim.g.onedark_termcolors = 16
-		vim.cmd([[colorscheme onedark ]])
-	end,
+  'olimorris/onedarkpro.nvim',
+  lazy = false,
+  priority = 1000, -- make sure to load this before all the other start plugins
+  opts = {
+    colors = {}
+  },
+  config = function(_, opts)
+    require("onedarkpro").setup(opts)
+    vim.cmd([[colorscheme onedark_dark]])
+  end,
 }
