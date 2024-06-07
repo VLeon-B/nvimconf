@@ -9,7 +9,13 @@ return {
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
     vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-    local on_attach = function(_, buffnumber)
+    local on_attach = function(client, buffnumber)
+      if client.server_capabilities.documentFormattingProvider then
+        vim.api.nvim_command [[augroup Format]]
+        vim.api.nvim_command [[autocmd! * <buffer>]]
+        vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+        vim.api.nvim_command [[augroup END]]
+      end
       vim.bo[buffnumber].omnifunc = 'v:lua.vim.lsp.omnifunc'
       local opts = { buffer = buffnumber }
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -25,17 +31,34 @@ return {
         vim.lsp.buf.format { async = true }
       end, opts)
     end
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
     require("neodev").setup()
-    require("lspconfig").lua_ls.setup({
+    require("lspconfig").lua_ls.setup {
       on_attach = on_attach,
+      capabilities = capabilities,
       settings = {
         Lua = {
           workspace = { checkThirdParty = false }
         }
       }
-    })
+    }
+    require('lspconfig').phpactor.setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      cmd = { 'phpactor', 'language-server', '-vvv' },
+      filetypes = { 'php' },
+      root_dir = require('lspconfig').util.root_pattern('composer.json', '.git'),
+      flags = {
+        debounce_text_changes = 150,
+      },
+      settings = {
+      },
+    }
     require('lspconfig').yamlls.setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
       settings = {
         yaml = {
           workspace = { checkThirdParty = false },
@@ -47,6 +70,9 @@ return {
         },
       }
     }
-    require("lspconfig").tsserver.setup({})
+    require("lspconfig").tsserver.setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
   end
 }
